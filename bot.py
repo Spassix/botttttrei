@@ -249,7 +249,8 @@ def main() -> None:
         application.run_webhook(
             listen="0.0.0.0",
             port=int(render_port),
-            webhook_path=webhook_path,
+            url_path=webhook_path,
+            webhook_url=webhook_url,
             allowed_updates=Update.ALL_TYPES
         )
     else:
