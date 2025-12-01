@@ -6,7 +6,8 @@ users.json
 
 # Images
 *.png
-!caligaz_logo.png
+!coffee_logo.png
+!coffi_logo.png
 *.jpg
 *.jpeg
 *.gif

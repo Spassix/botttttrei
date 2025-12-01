@@ -26,13 +26,11 @@ ADMIN_ID = int(os.getenv("ADMIN_ID", 0))
 
 # Chemins des liens
 MINI_APP_URL = os.getenv("MINI_APP_URL")
-POTATO_URL = os.getenv("POTATO_URL")
-INSTAGRAM_URL = os.getenv("INSTAGRAM_URL")
-SIGNAL_URL = os.getenv("SIGNAL_URL")
-TELEGRAM_URL = os.getenv("TELEGRAM_URL")
+TELEGRAM_CHANNEL_URL = os.getenv("TELEGRAM_CHANNEL_URL")
+SNAPCHAT_URL = os.getenv("SNAPCHAT_URL")
 
 # Chemin de l'image (à ajouter dans le dossier)
-IMAGE_PATH = os.getenv("IMAGE_PATH", "caligaz_logo.png")
+IMAGE_PATH = os.getenv("IMAGE_PATH", "coffi_logo.png")
 
 # Fichier pour stocker les utilisateurs
 USERS_FILE = os.getenv("USERS_FILE", "users.json")
@@ -74,28 +72,24 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = []
     if MINI_APP_URL:
         keyboard.append([InlineKeyboardButton("🚀 Mini App", web_app=WebAppInfo(url=MINI_APP_URL))])
-    if POTATO_URL:
-        keyboard.append([InlineKeyboardButton("🥔 Potato", url=POTATO_URL)])
-    if INSTAGRAM_URL:
-        keyboard.append([InlineKeyboardButton("📷 Instagram", url=INSTAGRAM_URL)])
-    if SIGNAL_URL:
-        keyboard.append([InlineKeyboardButton("📱 Signal", url=SIGNAL_URL)])
-    if TELEGRAM_URL:
-        keyboard.append([InlineKeyboardButton("💬 Telegram", url=TELEGRAM_URL)])
+    if TELEGRAM_CHANNEL_URL:
+        keyboard.append([InlineKeyboardButton("💬 Canal Telegram", url=TELEGRAM_CHANNEL_URL)])
+    if SNAPCHAT_URL:
+        keyboard.append([InlineKeyboardButton("👻 Snapchat", url=SNAPCHAT_URL)])
     reply_markup = InlineKeyboardMarkup(keyboard)
     
     # Message de bienvenue (HTML pour éviter les problèmes de parsing)
-    welcome_message = """<b>🔥 Cali Gaz 🔥</b>
+    welcome_message = """<b>☕ Coffi Wervicq ☕</b>
 
-Salut ! 👋
+Bienvenue dans Coffi Wervicq ! 🌟
 
-Rejoins notre communauté et accède à tous nos réseaux.
+Découvre nos produits premium.
 
-Choisis ton réseau 👇
+Explore nos réseaux et reste connecté 👇
 
 <b>💡 Astuce :</b> Utilise /start pour réactualiser le menu
 
-<b>📞 Contact direct :</b> @caligazOff2"""
+<b>📞 Contact direct :</b> @coffi599"""
     
     # Envoi de l'image si elle existe, sinon juste le message
     try:
@@ -116,17 +110,17 @@ Choisis ton réseau 👇
     except Exception as e:
         logger.error(f"Erreur lors de l'envoi de l'image: {e}")
         # En cas d'erreur, envoyer sans formatage
-        welcome_message_plain = """🔥 Cali Gaz 🔥
+        welcome_message_plain = """☕ Coffi Wervicq ☕
 
-Salut ! 👋
+Bienvenue dans Coffi Wervicq ! 🌟
 
-Rejoins notre communauté et accède à tous nos réseaux.
+Découvre nos produits premium.
 
-Choisis ton réseau 👇
+Explore nos réseaux et reste connecté 👇
 
 💡 Astuce : Utilise /start pour réactualiser le menu
 
-📞 Contact direct : @caligazOff2"""
+📞 Contact direct : @coffi599"""
         await update.message.reply_text(
             welcome_message_plain,
             reply_markup=reply_markup

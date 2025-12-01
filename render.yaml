@@ -12,11 +12,9 @@ services:
         sync: false
       - key: MINI_APP_URL
         sync: false
-      - key: TELEGRAM_URL
+      - key: TELEGRAM_CHANNEL_URL
         sync: false
-      - key: CANAL_SECOURS_URL
-        sync: false
-      - key: WHATSAPP_URL
+      - key: SNAPCHAT_URL
         sync: false
 
 
