@@ -26,12 +26,7 @@ ADMIN_ID = int(os.getenv("ADMIN_ID", 0))
 
 # Chemins des liens
 MINI_APP_URL = os.getenv("MINI_APP_URL")
-TELEGRAM_CHANNEL_URL = os.getenv("TELEGRAM_CHANNEL_URL")
-TELEGRAM_RETURN_URL = os.getenv("TELEGRAM_RETURN_URL")
-WHATSAPP_URL = os.getenv("WHATSAPP_URL")
-POTATO_URL = os.getenv("POTATO_URL")
-POTATO_RETURN_URL = os.getenv("POTATO_RETURN_URL")
-INSTAGRAM_URL = os.getenv("INSTAGRAM_URL")
+SNAPCHAT_URL = os.getenv("SNAPCHAT_URL")
 
 # Chemin de l'image (à ajouter dans le dossier)
 IMAGE_PATH = os.getenv("IMAGE_PATH", "coffi_logo.png")
@@ -72,36 +67,26 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Sauvegarder l'utilisateur
     save_user(user.id)
     
-    # Création du clavier avec les boutons
+    # Création du clavier avec les boutons (Mini App et Snapchat)
     keyboard = []
     if MINI_APP_URL:
         keyboard.append([InlineKeyboardButton("🚀 Mini App", web_app=WebAppInfo(url=MINI_APP_URL))])
-    if WHATSAPP_URL:
-        keyboard.append([InlineKeyboardButton("💬 WhatsApp", url=WHATSAPP_URL)])
-    if TELEGRAM_CHANNEL_URL:
-        keyboard.append([InlineKeyboardButton("📱 Canal Telegram", url=TELEGRAM_CHANNEL_URL)])
-    if TELEGRAM_RETURN_URL:
-        keyboard.append([InlineKeyboardButton("🔄 Canal Retour Telegram", url=TELEGRAM_RETURN_URL)])
-    if POTATO_URL:
-        keyboard.append([InlineKeyboardButton("🥔 Canal Potato", url=POTATO_URL)])
-    if POTATO_RETURN_URL:
-        keyboard.append([InlineKeyboardButton("🔄 Canal Retour Potato", url=POTATO_RETURN_URL)])
-    if INSTAGRAM_URL:
-        keyboard.append([InlineKeyboardButton("📸 Instagram", url=INSTAGRAM_URL)])
+    if SNAPCHAT_URL:
+        keyboard.append([InlineKeyboardButton("👻 Snapchat", url=SNAPCHAT_URL)])
     reply_markup = InlineKeyboardMarkup(keyboard)
     
     # Message de bienvenue (HTML pour éviter les problèmes de parsing)
-    welcome_message = """<b>🤖 Hash Quality</b>
+    welcome_message = """<b>🤖 Familly Ashhhh</b>
 
-Bienvenue dans Hash Quality ! 🌟
+Bienvenue dans Familly Ashhhh ! 🌟
 
-Découvre nos produits premium.
+Découvrez notre sélection exclusive de produits de qualité.
 
-Explore nos réseaux et reste connecté 👇
+Accédez à notre boutique directement depuis le bot 👇
 
-<b>💡 Astuce :</b> Utilise /start pour réactualiser le menu
+<b>💡 Astuce :</b> Utilisez /start pour réactualiser le menu
 
-<b>📞 Contact direct :</b> @hashqualitycommande"""
+<b>📞 Contact direct :</b> @spouwn"""
     
     # Envoi de l'image si elle existe, sinon juste le message
     try:
@@ -122,17 +107,17 @@ Explore nos réseaux et reste connecté 👇
     except Exception as e:
         logger.error(f"Erreur lors de l'envoi de l'image: {e}")
         # En cas d'erreur, envoyer sans formatage
-        welcome_message_plain = """🤖 Hash Quality
+        welcome_message_plain = """🤖 Familly Ashhhh
 
-Bienvenue dans Hash Quality ! 🌟
+Bienvenue dans Familly Ashhhh ! 🌟
 
-Découvre nos produits premium.
+Découvrez notre sélection exclusive de produits de qualité.
 
-Explore nos réseaux et reste connecté 👇
+Accédez à notre boutique directement depuis le bot 👇
 
-💡 Astuce : Utilise /start pour réactualiser le menu
+💡 Astuce : Utilisez /start pour réactualiser le menu
 
-📞 Contact direct : @hashqualitycommande"""
+📞 Contact direct : @spouwn"""
         await update.message.reply_text(
             welcome_message_plain,
             reply_markup=reply_markup

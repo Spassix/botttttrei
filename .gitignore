@@ -6,7 +6,7 @@ users.json
 
 # Images
 *.png
-!hqualiti_logo.png
+!familly_logo.png
 *.jpg
 *.jpeg
 *.gif
