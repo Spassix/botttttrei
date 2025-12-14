@@ -26,13 +26,12 @@ ADMIN_ID = int(os.getenv("ADMIN_ID", 0))
 
 # Chemins des liens
 MINI_APP_URL = os.getenv("MINI_APP_URL")
-INSTAGRAM_URL = os.getenv("INSTAGRAM_URL")
 WHATSAPP_URL = os.getenv("WHATSAPP_URL")
 TELEGRAM_CHANNEL_URL = os.getenv("TELEGRAM_CHANNEL_URL")
-TELEGRAM_RETURN_URL = os.getenv("TELEGRAM_RETURN_URL")
+POTATO_URL = os.getenv("POTATO_URL")
 
 # Chemin de l'image (à ajouter dans le dossier)
-IMAGE_PATH = os.getenv("IMAGE_PATH", "monkeys_logo.png")
+IMAGE_PATH = os.getenv("IMAGE_PATH", "reina_logo.png")
 
 # Fichier pour stocker les utilisateurs
 USERS_FILE = os.getenv("USERS_FILE", "users.json")
@@ -77,26 +76,24 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = []
     if MINI_APP_URL:
         keyboard.append([InlineKeyboardButton("🚀 Mini App", web_app=WebAppInfo(url=MINI_APP_URL))])
+    if POTATO_URL:
+        keyboard.append([InlineKeyboardButton("🥔 Potato", url=POTATO_URL)])
     if TELEGRAM_CHANNEL_URL:
-        keyboard.append([InlineKeyboardButton("📱 Canal Telegram", url=TELEGRAM_CHANNEL_URL)])
-    if INSTAGRAM_URL:
-        keyboard.append([InlineKeyboardButton("📸 Instagram", url=INSTAGRAM_URL)])
+        keyboard.append([InlineKeyboardButton("📱 Canal Chat", url=TELEGRAM_CHANNEL_URL)])
     if WHATSAPP_URL:
         keyboard.append([InlineKeyboardButton("📞 Contact", url=WHATSAPP_URL)])
-    if TELEGRAM_RETURN_URL:
-        keyboard.append([InlineKeyboardButton("↩️ Retour", url=TELEGRAM_RETURN_URL)])
     reply_markup = InlineKeyboardMarkup(keyboard)
     
     # Message de bienvenue (HTML pour éviter les problèmes de parsing)
-    welcome_message = f"""👋 Salut {user_name} ! Bienvenue sur le bot officiel de Haze Monkeyz !
+    welcome_message = f"""🌾 Salut {user_name} ! Bienvenue sur Reina Farm !
 
-🌿 Découvre notre univers et reste connecté avec notre communauté.
+⚜️ Explorez notre collection premium et rejoignez notre communauté exclusive.
 
-📲 Accède à notre Mini App, rejoins notre canal Telegram et suis-nous sur Instagram.
+🎯 Accédez à notre Mini App, découvrez notre canal Telegram et restez connecté avec nous.
 
-💬 Besoin d'aide ? Contacte-nous directement via le bouton Contact !
+💬 Une question ? Notre équipe est là pour vous aider via le bouton Contact !
 
-✨ Bienvenue dans la famille Haze Monkeyz !"""
+🌟 Bienvenue dans l'univers Reina Farm !"""
     
     # Envoi de l'image si elle existe, sinon juste le message
     try:
@@ -117,15 +114,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     except Exception as e:
         logger.error(f"Erreur lors de l'envoi de l'image: {e}")
         # En cas d'erreur, envoyer sans formatage
-        welcome_message_plain = f"""👋 Salut {user_name} ! Bienvenue sur le bot officiel de Haze Monkeyz !
+        welcome_message_plain = f"""🌾 Salut {user_name} ! Bienvenue sur Reina Farm !
 
-🌿 Découvre notre univers et reste connecté avec notre communauté.
+⚜️ Explorez notre collection premium et rejoignez notre communauté exclusive.
 
-📲 Accède à notre Mini App, rejoins notre canal Telegram et suis-nous sur Instagram.
+🎯 Accédez à notre Mini App, découvrez notre canal Telegram et restez connecté avec nous.
 
-💬 Besoin d'aide ? Contacte-nous directement via le bouton Contact !
+💬 Une question ? Notre équipe est là pour vous aider via le bouton Contact !
 
-✨ Bienvenue dans la famille Haze Monkeyz !"""
+🌟 Bienvenue dans l'univers Reina Farm !"""
         await update.message.reply_text(
             welcome_message_plain,
             reply_markup=reply_markup
